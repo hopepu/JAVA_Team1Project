@@ -1,5 +1,18 @@
 package com.show.SV;
 
-public class myPageSV {
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.show.DTO.LoginDTO;
+import com.show.DTO.ReviewDTO;
+import com.show.DTO.ShowDTO;
+
+public class MyPageSV {
+
+	public static LoginDTO menu(LoginDTO lSt, Scanner s, Scanner sL, ArrayList<LoginDTO> loginDTOs,
+			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
