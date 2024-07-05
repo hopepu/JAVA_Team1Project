@@ -9,6 +9,7 @@ public class ShowDTO {
 	private String actor;
 	private boolean netflix;
 	private boolean tVing;
+	private boolean disney;
 
 	// 생성자
 
@@ -77,6 +78,6 @@ public class ShowDTO {
 		this.disney = disney;
 	}
 
-	private boolean disney;
+	
 
 }
