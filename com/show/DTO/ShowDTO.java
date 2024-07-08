@@ -9,6 +9,7 @@ public class ShowDTO {
 	private String actor;
 	private boolean netflix;
 	private boolean tVing;
+	private boolean disney;
 
 	// 생성자
 
@@ -41,8 +42,8 @@ public class ShowDTO {
 		return tVing;
 	}
 
-	public boolean isDiney() {
-		return diney;
+	public boolean isdisney() {
+		return disney;
 	}
 
 	public void setTitle(String title) {
@@ -73,10 +74,10 @@ public class ShowDTO {
 		this.tVing = tVing;
 	}
 
-	public void setDiney(boolean diney) {
-		this.diney = diney;
+	public void setdisney(boolean disney) {
+		this.disney = disney;
 	}
 
-	private boolean diney;
+	
 
 }

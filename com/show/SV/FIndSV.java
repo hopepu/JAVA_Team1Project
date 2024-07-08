@@ -1,11 +1,20 @@
 package com.show.SV;
 
+<<<<<<< HEAD
 //import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.show.DTO.MemberDTO;
 import com.show.exception.NoExistException;
+=======
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.show.DTO.LoginDTO;
+import com.show.DTO.ReviewDTO;
+import com.show.DTO.ShowDTO;
+>>>>>>> origin/main
 
 public class FIndSV {
 	/* 메뉴*/
@@ -115,6 +124,12 @@ public class FIndSV {
 		} // --for()
 
 		return findIndex;
+	}
+
+	public static void menu(LoginDTO lSt, Scanner s, Scanner sL, ArrayList<LoginDTO> loginDTOs,
+			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
