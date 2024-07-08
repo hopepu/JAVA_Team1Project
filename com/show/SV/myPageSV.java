@@ -147,10 +147,12 @@ public class myPageSV {
 					delMember=memberDTOs.get(i);//해당 인덱스 내용 delMember에 넣기(**추후 삭제인원 관리 시 이 객체 이동)
 					memberDTOs.remove(i); //찾은 인덱스 지우기
 					System.out.println(delMember.getName()+"님의 회원탈퇴가 완료되었습니다. 안녕히 가세요.");
+					break;
 				}else {
 					throw new NoExistException("회원정보가 확인되지 않습니다.");
 				}//--if()
-
+			default:
+				System.out.println("1~2값만 입력하세요.");
 			}// --switch()
 
 		} // --while()
