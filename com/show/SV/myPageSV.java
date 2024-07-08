@@ -32,7 +32,7 @@ public class myPageSV {
 	public static void subMenu(Scanner s, List<MemberDTO> memberDTOs, MemberDTO loginState) {
 		boolean run = true;
 		while (run) {
-			System.out.println("1.회원정보 변경 | 2.회원탈퇴 | 3.로그아웃");
+			System.out.println("1.회원정보 변경 | 2.회원탈퇴 | 3.로그아웃 | 4.닫기 ");
 			int selInt = s.nextInt();
 			switch (selInt) {
 			case 1:
@@ -49,6 +49,9 @@ public class myPageSV {
 				break;
 			case 3:
 				loginState.setLoginStatus(false);
+				run = false;
+				break;
+			case 4:
 				run = false;
 				break;
 			default:
@@ -161,8 +164,8 @@ public class myPageSV {
 
 	/* 공통메서드-패스워드 글자수만큼 별찍기 */
 	public static String printStar(MemberDTO loginState) {
-		String star = null; // 별 넣을 빈 문자열 변수
-		for (int i = 0; i < loginState.getPw().length(); i++) {// 글자수 만큼 돌면서
+		String star = "*"; // 별 넣을 빈 문자열 변수
+		for (int i = 0; i < loginState.getPw().length()-1; i++) {// 글자수 만큼 돌면서
 			star += "*"; // star에 별 누적
 		}
 		return star;
