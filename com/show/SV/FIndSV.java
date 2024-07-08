@@ -1,20 +1,11 @@
 package com.show.SV;
 
-<<<<<<< HEAD
 //import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.show.DTO.MemberDTO;
 import com.show.exception.NoExistException;
-=======
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import com.show.DTO.LoginDTO;
-import com.show.DTO.ReviewDTO;
-import com.show.DTO.ShowDTO;
->>>>>>> origin/main
 
 public class FIndSV {
 	/* 메뉴*/
@@ -125,11 +116,20 @@ public class FIndSV {
 
 		return findIndex;
 	}
+	
+	/* 메소드(공통)-리스트에서 id 검색하여 인덱스 리턴 */
+	public static int findIDIndex(String id, List<MemberDTO> memberDTOs) throws NoExistException {
+		int findIndex = 0; // 찾은 인덱스 번호 넣을 변수
+		for (MemberDTO findUser : memberDTOs) {
+			if (findUser.getId().equals(id)) {// 휴대폰 번호가 같으면
+				findIndex = memberDTOs.indexOf(findUser); // 인덱스 번호 추출
+				break;
+			} else {// 휴대폰정보가 없으면
+				throw new NoExistException("가입 정보를 찾을 수 없습니다.");
+			}
+		} // --for()
 
-	public static void menu(LoginDTO lSt, Scanner s, Scanner sL, ArrayList<LoginDTO> loginDTOs,
-			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs) {
-		// TODO Auto-generated method stub
-		
+		return findIndex;
 	}
 
 }
