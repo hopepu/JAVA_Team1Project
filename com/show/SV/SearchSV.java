@@ -1,6 +1,6 @@
 package com.show.SV;
 
-import com.show.DTO.LoginDTO;
+import com.show.DTO.MemberDTO;
 
 public class SearchSV {
 

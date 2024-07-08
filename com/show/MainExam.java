@@ -3,7 +3,7 @@ package com.show;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.show.DTO.LoginDTO;
+import com.show.DTO.MemberDTO;
 import com.show.DTO.ReviewDTO;
 import com.show.DTO.ShowDTO;
 import com.show.SV.FIndSV;
@@ -11,21 +11,26 @@ import com.show.SV.LoginSV;
 import com.show.SV.SearchSV;
 import com.show.SV.myPageSV;
 
+
 public class MainExam {
 
-	public static LoginDTO lSt = new LoginDTO();
+	public static MemberDTO lSt = new MemberDTO();
 	public static Scanner s = new Scanner(System.in);// 단어 입력
 	public static Scanner sL = new Scanner(System.in);// 긴 문장 입력
-	public static ArrayList<LoginDTO> loginDTOs = new ArrayList<LoginDTO>();
+	public static ArrayList<MemberDTO> loginDTOs = new ArrayList<MemberDTO>();
 	public static ArrayList<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
 	public static ArrayList<ShowDTO> showDTOs = new ArrayList<ShowDTO>();
+	private static MemberDTO loginState;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		lSt.setLoginStatus(false);
+		 MemberDTO guest = new MemberDTO();
+	     loginState=guest;
+		
+		lSt.setLoginStatus(false);				
 		boolean run = true;
 		System.out.println("<오잼>(가제 : 오늘은 무엇이 재밌을까?)에 오신것을 환영합니다.");
-
+	
 		while (run) {
 			if (lSt.getLoginStatus()) {
 				System.out.println("아래의 메뉴에서 골라주세요.");
