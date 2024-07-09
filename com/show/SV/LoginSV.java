@@ -1,6 +1,7 @@
 package com.show.SV;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.show.DTO.DramaDTO;
@@ -25,59 +26,16 @@ public class LoginSV {
 
 				case "1":
 					System.out.println("로그인을 위한 ID / PW를 입력하세요.");
-					System.out.print("ID : ");
-					String id = s.next();
-					System.out.print("PW : ");
-					String pw = s.next();
-					MemberDTO login = new MemberDTO(id, pw);
-
-					for (MemberDTO find : loginDTOs) {
-
-						if (find.getId().equals(id)) {
-							System.out.println("ID를 확인했습니다.");
-
-							if (find.getPw().equals(pw)) {
-								System.out.println("PW를 확인했습니다.");
-								System.out.println("로그인 성공!!");
-								lSt = find;
-								lSt.setLoginStatus(true);
-								// 로그인 성공시에 로그인 스테이터스 논리값 부여필요
-							} else {
-								System.out.println("ID와 PW를 확인 해주세요");
-							} // if-if문 종료
-						} else {
-							System.out.println("ID와 PW를 확인 해주세요");
-						} // if문 종료
-					} // for문 종료
+					lSt = login(loginDTOs, lSt, s);
 					break;
+
 				case "2":
-					MemberDTO join = new MemberDTO();
-
-					System.out.println("회원 가입을 시작합니다.");
-					System.out.println("원하시는 ID를 입력하세요");
-					System.out.print(">>>");
-					String joinID = s.next();
-					join.setId(joinID, loginDTOs);
-
-					System.out.println("원하시는 PW를 입력하세요");
-					System.out.print(">>>");
-					String joinPW = s.next();
-
-					System.out.println("생년월일을 입력하세요");
-					System.out.print(">>>");
-					String joinBirth = s.next();
-
-					System.out.println("닉네임을 입력하세요");
-					System.out.print(">>>");
-					String joinNickName = s.next();
-
-					join.setPw(joinPW);
-					join.setBirth(joinBirth);
-					join.setNickName(joinNickName);
-					loginDTOs.add(join);
+					register(lSt, s, sL, loginDTOs, reviewDTOs, showDTOs,  dramaDTOs, varietyDTOs);
+					
 					break;
 				case "3":
 					System.out.println("메인메뉴로 돌아갑니다.");
+					run=false;
 					break;
 				case "4":
 					System.out.println("영화정보 찾기 메뉴로 돌아갑니다.");
@@ -94,40 +52,22 @@ public class LoginSV {
 				switch (select) {
 
 				case "1":
-					MyPageSV.menu(sL, loginDTOs, lSt);
+					lSt = MyPageSV.menu(sL, loginDTOs, lSt);
 					break;
 				case "2":
-					MemberDTO join = new MemberDTO();
-
-					System.out.println("회원 가입을 시작합니다.");
-					System.out.println("원하시는 ID를 입력하세요");
-					System.out.print(">>>");
-					String joinID = s.next();
-					join.setId(joinID, loginDTOs);
-
-					System.out.println("원하시는 PW를 입력하세요");
-					System.out.print(">>>");
-					String joinPW = s.next();
-
-					System.out.println("생년월일을 입력하세요");
-					System.out.print(">>>");
-					String joinBirth = s.next();
-
-					System.out.println("닉네임을 입력하세요");
-					System.out.print(">>>");
-					String joinNickName = s.next();
-
-					join.setPw(joinPW);
-					join.setBirth(joinBirth);
-					join.setNickName(joinNickName);
-					loginDTOs.add(join);
+					lSt = null;
+					lSt = new MemberDTO();
+					lSt.setLoginStatus(false);
+					run = false;
 					break;
+
 				case "3":
 					System.out.println("메인메뉴로 돌아갑니다.");
+					run=false;
 					break;
 				case "4":
-					System.out.println("회원정보 찾기 메뉴로 돌아갑니다.");
-					FIndSV.menu(sL, loginDTOs);
+					System.out.println("영화정보 찾기 메뉴로 돌아갑니다.");
+					SearchSV.menu(lSt, s, sL, loginDTOs, reviewDTOs, showDTOs, dramaDTOs, varietyDTOs);
 					break;
 				default:
 					System.out.println("1~3사이에서 입력해주시기 바랍니다.");
@@ -137,5 +77,101 @@ public class LoginSV {
 		}
 		return lSt;
 	}
+
+	private static void register(MemberDTO lSt, Scanner s, Scanner sL, ArrayList<MemberDTO> loginDTOs,
+			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs, ArrayList<DramaDTO> dramaDTOs,
+			ArrayList<VarietyDTO> varietyDTOs) {
+		MemberDTO join = new MemberDTO();
+
+		System.out.println("회원 가입을 시작합니다.");
+		boolean run = true;
+		String joinID = "";
+		while (run) {
+			System.out.println("원하시는 ID를 입력하세요");
+			System.out.print(">>>");
+			joinID = s.next();
+			boolean pass = true;
+			pass = join.setId(joinID, loginDTOs, pass);
+			
+			if (pass) {
+				join.setUsability(true);
+				if(join.isUsability()) {
+					System.out.println("사용 가능한 ID입니다.");
+					System.out.println("--------------------");
+					run=false;
+				}
+			}
+		}
+				System.out.println("원하시는 PW를 입력하세요");
+				System.out.print(">>>");
+				String joinPW = s.next();
+				
+				System.out.println("--------------------");
+				System.out.println("이름을 입력하세요");
+				System.out.print(">>>");
+				String joinName = s.next();
+				
+				System.out.println("--------------------");
+				System.out.println("생년월일을 입력하세요");
+				System.out.print(">>>");		
+				String joinBirth = s.next();
+				
+				System.out.println("--------------------");
+				System.out.println("닉네임을 입력하세요");
+				System.out.print(">>>");
+				String joinNickName = s.next();
+				
+				System.out.println("--------------------");
+				System.out.println("e-mail을 입력하세요");
+				System.out.print(">>>");
+				String joinEmail = s.next();
+				
+				System.out.println("--------------------");
+				System.out.println("전화번호를 입력하세요");
+				System.out.print(">>>");
+				String joinpNo = s.next();
+				
+				MemberDTO join1 = new MemberDTO(joinID, joinPW, joinName, joinBirth, joinNickName, joinpNo, joinEmail);
+				loginDTOs.add(join1);
+		
+		
+	}
+
+	private static MemberDTO login(ArrayList<MemberDTO> loginDTOs, MemberDTO lSt, Scanner s) {
+		System.out.print("ID : ");
+		String id = s.next();
+		System.out.print("PW : ");
+		String pw = s.next();
+		MemberDTO login = new MemberDTO(id, pw); // 입력받은 ID,PW를 넣을 객체 생성
+
+		try {
+			for (MemberDTO find : loginDTOs) {// memberDTOs 배열을 돌려
+				int i = 0;
+				if (find.getId().equals(id)) {
+					if (find.getPw().equals(pw)) {
+						System.out.println("로그인 성공!!");
+						i = loginDTOs.indexOf(find);
+						login = loginDTOs.get(i);
+						login.setLoginStatus(true);
+						lSt = login;
+						break;
+					} else {
+//						System.out.println("id, pw를 확인해주세요.");
+					} // if close
+				} else {
+//					System.out.println("id, pw를 확인해주세요.");
+				}  // if close
+
+			} // for close
+			if(login.getLoginStatus()==false) {
+				System.out.println("id, pw를 확인해주세요.");
+			}
+
+		} catch (Exception e) {
+			System.out.println("숫자를 입력해주세요");
+		}//try catch close
+
+		return lSt;
+	}// login method close
 
 }
