@@ -97,7 +97,7 @@ public class FIndSV {
 			System.out.println(findUser.getName() + "님의 임시비밀번호 : " + tempPW);
 			System.out.println("주의! 로그인 후 반드시 회원정보수정을 통해 비밀번호를 변경해 주세요.");
 			} else {// 이름, 주민번호가 다른 경우
-				throw new NoExistException("회원정보를 확인해 주세요.");
+//				throw new NoExistException("회원정보를 확인해 주세요.");
 			}
 	
 	}// --pwFind()
@@ -110,7 +110,7 @@ public class FIndSV {
 				findIndex = memberDTOs.indexOf(findUser); // 인덱스 번호 추출
 				break;
 			} else {// 휴대폰정보가 없으면
-				throw new NoExistException("가입 정보를 찾을 수 없습니다.");
+//				throw new NoExistException("가입 정보를 찾을 수 없습니다.");
 			}
 		} // --for()
 
@@ -121,11 +121,13 @@ public class FIndSV {
 	public static int findIDIndex(String id, List<MemberDTO> memberDTOs) throws NoExistException {
 		int findIndex = 0; // 찾은 인덱스 번호 넣을 변수
 		for (MemberDTO findUser : memberDTOs) {
-			if (findUser.getId().equals(id)) {// 휴대폰 번호가 같으면
+			if (findUser.getId().equals(id)) {
+				System.out.println("아이디확인");// 휴대폰 번호가 같으면
 				findIndex = memberDTOs.indexOf(findUser); // 인덱스 번호 추출
 				break;
 			} else {// 휴대폰정보가 없으면
-				throw new NoExistException("가입 정보를 찾을 수 없습니다.");
+				//throw new NoExistException("가입 정보를 찾을 수 없습니다.");
+				
 			}
 		} // --for()
 

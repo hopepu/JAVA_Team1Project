@@ -34,6 +34,7 @@ public class MyPageSV {
 		boolean run = true;
 		while (run) {
 			System.out.println("1.회원정보 변경 | 2.회원탈퇴 | 3.로그아웃 | 4.닫기 ");
+			System.out.print(">>>");
 			int selInt = s.nextInt();
 			switch (selInt) {
 			case 1:
@@ -45,7 +46,7 @@ public class MyPageSV {
 				} catch (NoExistException e) {
 					String message = e.getMessage();
 					System.out.println(message);
-					//e.printStackTrace();
+					// e.printStackTrace();
 				}
 				break;
 			case 3:
@@ -125,7 +126,7 @@ public class MyPageSV {
 	}// --modify()
 
 	/* 메서드-회원탈퇴 */
-	public static void delete(Scanner s, List<MemberDTO> memberDTOs, MemberDTO loginState) throws NoExistException{
+	public static void delete(Scanner s, List<MemberDTO> loginDTOs, MemberDTO lSt) throws NoExistException {
 		boolean run = true;
 		while (run) {
 			System.out.println("회원을 탈퇴하시겠습니까? \n모든 서비스에 대한 권리를 상실하실 수 있습니다.");
@@ -137,8 +138,8 @@ public class MyPageSV {
 				run = false;
 				break;
 			case 2: // 회원정보 재확인 후 탈퇴 진행
-				MemberDTO delMember = new MemberDTO(); //삭제비교용 객체 생성
-				//회원정보 재확인
+				// MemberDTO delMember = new MemberDTO(); //삭제비교용 객체 생성
+				// 회원정보 재확인
 				System.out.println("회원정보를 재확인합니다.");
 				System.out.println("아이디를 입력하세요.");
 				System.out.print(">>>");
@@ -146,16 +147,22 @@ public class MyPageSV {
 				System.out.println("패스워드를 입력하세요.");
 				System.out.print(">>>");
 				String pw = s.next();
-				
-				if(loginState.getId().equals(id)&&loginState.getPw().equals(pw)) {//재입력내용이 맞으면
-					int i = FIndSV.findIDIndex(id, memberDTOs); //id로 해당 인덱스 번호 받아오기
-					delMember=memberDTOs.get(i);//해당 인덱스 내용 delMember에 넣기(**추후 삭제인원 관리 시 이 객체 이동)
-					memberDTOs.remove(i); //찾은 인덱스 지우기
-					System.out.println(delMember.getName()+"님의 회원탈퇴가 완료되었습니다. 안녕히 가세요.");
-					break;
-				}else {
-					throw new NoExistException("회원정보가 확인되지 않습니다.");
-				}//--if()
+				for (MemberDTO delMember : loginDTOs) {
+					if (lSt.getId().equals(id)) {// 재입력내용이 맞으면
+						if (lSt.getPw().equals(pw)) {
+							int i = FIndSV.findIDIndex(id, loginDTOs); // id로 해당 인덱스 번호 받아오기
+							delMember = loginDTOs.get(i);// 해당 인덱스 내용 delMember에 넣기(**추후 삭제인원 관리 시 이 객체 이동)
+							loginDTOs.remove(i); // 찾은 인덱스 지우기
+							System.out.println(delMember.getName() + "님의 회원탈퇴가 완료되었습니다. 안녕히 가세요.");
+							run = false;
+							break;
+						}
+					} else {
+						//throw new NoExistException();// ("회원정보가 확인되지 않습니다.");
+					} // --if()
+				}
+				System.out.println("회원정보가 확인되지 않습니다.");
+				break;
 			default:
 				System.out.println("1~2값만 입력하세요.");
 			}// --switch()
@@ -165,9 +172,9 @@ public class MyPageSV {
 	}// --delete()
 
 	/* 공통메서드-패스워드 글자수만큼 별찍기 */
-	public static String printStar(MemberDTO loginState) {
+	public static String printStar(MemberDTO lSt) {
 		String star = "*"; // 별 넣을 빈 문자열 변수
-		for (int i = 0; i < loginState.getPw().length()-1; i++) {// 글자수 만큼 돌면서
+		for (int i = 0; i < lSt.getPw().length() - 1; i++) {// 글자수 만큼 돌면서
 			star += "*"; // star에 별 누적
 		}
 		return star;
