@@ -1,51 +1,17 @@
 package com.show.DTO;
 
 public class ShowDTO {
-	@Override
-	public String toString() {
-		return "title=" + title + "program=" + program + ", category=" + category
-								+"\n director=" + director + ", actor=" + actor
-								+"\n contents=" + contents;
-	}
-
 	// 필드
 	private String title;
 	private String contents; // 내용설명
-	private String program; // 프로그램 종류 -> 티빙, 넷플릭스, 디즈니
-	private String category; // 장르종류 -> 로맨스, 액션 등등
+	private String category; // 프로그램 종류
 	private String director;
 	private String actor;
-	private String no;
+	private boolean netflix;
+	private boolean tVing;
+	private boolean disney;
 
 	// 생성자
-	public ShowDTO() {
-		// 기본생성자
-	}
-
-	public ShowDTO(String program, String category, String title, String director, String actor, String contents) {
-		this.program = program;
-		this.category = category;
-		this.title = title;
-		this.director = director;
-		this.actor = actor;
-		this.contents = contents;
-
-	}
-
-	public void showList(String i) {
-		setNo(i);
-		System.out.println(i+".  [" + getProgram() + "]" + " | " + getTitle());
-
-	}
-
-	public void showInfo() {
-		System.out.println("[" + getProgram() + "]" + " | " + getTitle());
-		System.out.println(getCategory());
-		System.out.println("감독:" + getDirector());
-		System.out.println("출연진:" + getActor());
-		System.out.println("---------------------------------------");
-
-	}
 
 	// 메서드
 	public String getTitle() {
@@ -56,8 +22,8 @@ public class ShowDTO {
 		return contents;
 	}
 
-	public String getProgram() {
-		return program;
+	public String getCategory() {
+		return category;
 	}
 
 	public String getDirector() {
@@ -68,6 +34,18 @@ public class ShowDTO {
 		return actor;
 	}
 
+	public boolean isNetflix() {
+		return netflix;
+	}
+
+	public boolean istVing() {
+		return tVing;
+	}
+
+	public boolean isdisney() {
+		return disney;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -76,8 +54,8 @@ public class ShowDTO {
 		this.contents = contents;
 	}
 
-	public void setPrograme(String program) {
-		this.program = program;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public void setDirector(String director) {
@@ -88,19 +66,18 @@ public class ShowDTO {
 		this.actor = actor;
 	}
 
-	public String getCategory() {
-		return category;
+	public void setNetflix(boolean netflix) {
+		this.netflix = netflix;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void settVing(boolean tVing) {
+		this.tVing = tVing;
 	}
 
-	public String getNo() {
-		return no;
+	public void setdisney(boolean disney) {
+		this.disney = disney;
 	}
 
-	public void setNo(String no) {
-		this.no = no;
-	}
+	
+
 }
