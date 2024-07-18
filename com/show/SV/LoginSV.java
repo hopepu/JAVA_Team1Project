@@ -1,86 +1,14 @@
 package com.show.SV;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.Scanner;
-
-import com.show.DTO.DramaDTO;
 import com.show.DTO.MemberDTO;
-import com.show.DTO.ReviewDTO;
-import com.show.DTO.ShowDTO;
-import com.show.DTO.VarietyDTO;
 
 public class LoginSV {
 
-	public static MemberDTO menu(MemberDTO lSt, Scanner s, Scanner sL, ArrayList<MemberDTO> loginDTOs,
-			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs, ArrayList<DramaDTO> dramaDTOs,
-			ArrayList<VarietyDTO> varietyDTOs) {
-		boolean run = true;
 
-		while (run) {
-			if (!lSt.getLoginStatus()) {
-				System.out.println("1. 로그인 | 2. 회원가입 | 3. exit | 4. 영화 정보 찾기");
-				System.out.print(">>>");
-				String select = s.next();
-				switch (select) {
-
-				case "1":
-					System.out.println("로그인을 위한 ID / PW를 입력하세요.");
-					lSt = login(loginDTOs, lSt, s);
-					break;
-
-				case "2":
-					register(lSt, s, sL, loginDTOs, reviewDTOs, showDTOs,  dramaDTOs, varietyDTOs);
-					
-					break;
-				case "3":
-					System.out.println("메인메뉴로 돌아갑니다.");
-					run=false;
-					break;
-				case "4":
-					System.out.println("영화정보 찾기 메뉴로 돌아갑니다.");
-					SearchSV.menu(lSt, s, sL, loginDTOs, reviewDTOs, showDTOs, dramaDTOs, varietyDTOs);
-					break;
-				default:
-					System.out.println("1~3사이에서 입력해주시기 바랍니다.");
-
-				} // switch 종료
-			} else {
-				System.out.println("1. 마이페이지 | 2. 로그아웃 | 3. exit | 4. 영화정보찾기");
-				System.out.print(">>>");
-				String select = s.next();
-				switch (select) {
-
-				case "1":
-					lSt = MyPageSV.menu(sL, loginDTOs, lSt);
-					break;
-				case "2":
-					lSt = null;
-					lSt = new MemberDTO();
-					lSt.setLoginStatus(false);
-					run = false;
-					break;
-
-				case "3":
-					System.out.println("메인메뉴로 돌아갑니다.");
-					run=false;
-					break;
-				case "4":
-					System.out.println("영화정보 찾기 메뉴로 돌아갑니다.");
-					SearchSV.menu(lSt, s, sL, loginDTOs, reviewDTOs, showDTOs, dramaDTOs, varietyDTOs);
-					break;
-				default:
-					System.out.println("1~3사이에서 입력해주시기 바랍니다.");
-				}
-			}
-
-		}
-		return lSt;
-	}
-
-	private static void register(MemberDTO lSt, Scanner s, Scanner sL, ArrayList<MemberDTO> loginDTOs,
-			ArrayList<ReviewDTO> reviewDTOs, ArrayList<ShowDTO> showDTOs, ArrayList<DramaDTO> dramaDTOs,
-			ArrayList<VarietyDTO> varietyDTOs) {
+	public static void register(Scanner s, MemberDTO loginState, ArrayList<MemberDTO> loginDTOs) {
 		MemberDTO join = new MemberDTO();
 
 		System.out.println("회원 가입을 시작합니다.");
@@ -137,7 +65,7 @@ public class LoginSV {
 		
 	}
 
-	private static MemberDTO login(ArrayList<MemberDTO> loginDTOs, MemberDTO lSt, Scanner s) {
+	public static MemberDTO login(Scanner s, MemberDTO loginState, ArrayList<MemberDTO> loginDTOs) {
 		System.out.print("ID : ");
 		String id = s.next();
 		System.out.print("PW : ");
@@ -153,7 +81,7 @@ public class LoginSV {
 						i = loginDTOs.indexOf(find);
 						login = loginDTOs.get(i);
 						login.setLoginStatus(true);
-						lSt = login;
+						loginState = login;
 						break;
 					} else {
 //						System.out.println("id, pw를 확인해주세요.");
@@ -171,7 +99,7 @@ public class LoginSV {
 			System.out.println("숫자를 입력해주세요");
 		}//try catch close
 
-		return lSt;
+		return loginState;
 	}// login method close
 
 }

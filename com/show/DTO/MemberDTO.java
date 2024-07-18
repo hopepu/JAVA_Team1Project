@@ -30,7 +30,7 @@ public class MemberDTO {
 		this.loginStatus = false; // 로그인 검증후 성공시 변경
 	}
 
-	public MemberDTO(String id, String pw, String name, String birth, String nickName, String pNo, String mail) {// 회원가입시 생성자
+	public MemberDTO(String id, String pw, String name, String ssn, String nickName, String pNo, String mail) {// 회원가입시 생성자
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
